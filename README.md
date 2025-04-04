@@ -18,6 +18,8 @@ $ python app.py
 
 打开浏览器访问控制台展示的地址（例如[http://127.0.0.1:8000](http://127.0.0.1:8000)），按照网页的指示自己玩
 
+把下载的 `Custom.mxtpro` 丢到安装目录即可
+
 ## Vercel 部署
 
 https://moba-genkey.vercel.app/
