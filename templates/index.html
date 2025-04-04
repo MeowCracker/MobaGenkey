@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>License Generator</title>
+    <script src="https://unpkg.com/sober@latest/dist/sober.min.js"></script>
+    <style>
+        s-page {
+            --s-color-primary: #5b53a8;
+            --s-color-on-primary: #ffffff;
+            --s-color-primary-container: #e4dfff;
+            --s-color-on-primary-container: #150362;
+            --s-color-secondary: #5e5c71;
+            --s-color-on-secondary: #ffffff;
+            --s-color-secondary-container: #e4dff9;
+            --s-color-on-secondary-container: #1b192c;
+            --s-color-tertiary: #7b5266;
+            --s-color-on-tertiary: #ffffff;
+            --s-color-tertiary-container: #ffd8e8;
+            --s-color-on-tertiary-container: #2f1122;
+            --s-color-error: #ba1a1a;
+            --s-color-on-error: #ffffff;
+            --s-color-error-container: #ffdad6;
+            --s-color-on-error-container: #410002;
+            --s-color-background: #fffbff;
+            --s-color-on-background: #1c1b1f;
+            --s-color-outline: #787680;
+            --s-color-outline-variant: #c8c5d0;
+            --s-color-surface: #fffbff;
+            --s-color-on-surface: #1c1b1f;
+            --s-color-surface-variant: #e5e1ec;
+            --s-color-on-surface-variant: #47464f;
+            --s-color-inverse-surface: #313034;
+            --s-color-inverse-on-surface: #f4eff4;
+            --s-color-inverse-primary: #c6c0ff;
+            --s-color-surface-container: #f1ecf1;
+            --s-color-surface-container-lowest: #e5e1e6;
+            --s-color-surface-container-low: #ebe7ec;
+            --s-color-surface-container-high: #f7f2f7;
+            --s-color-surface-container-highest: #ffffff;
+            --s-color-dark-primary: #c6c0ff;
+            --s-color-dark-on-primary: #2c2276;
+            --s-color-dark-primary-container: #433b8e;
+            --s-color-dark-on-primary-container: #e4dfff;
+            --s-color-dark-secondary: #c8c3dc;
+            --s-color-dark-on-secondary: #302e41;
+            --s-color-dark-secondary-container: #474459;
+            --s-color-dark-on-secondary-container: #e4dff9;
+            --s-color-dark-tertiary: #ebb8cf;
+            --s-color-dark-on-tertiary: #482537;
+            --s-color-dark-tertiary-container: #613b4e;
+            --s-color-dark-on-tertiary-container: #ffd8e8;
+            --s-color-dark-error: #ffb4ab;
+            --s-color-dark-on-error: #690005;
+            --s-color-dark-error-container: #93000a;
+            --s-color-dark-on-error-container: #ffb4ab;
+            --s-color-dark-background: #1c1b1f;
+            --s-color-dark-on-background: #e5e1e6;
+            --s-color-dark-outline: #928f99;
+            --s-color-dark-outline-variant: #47464f;
+            --s-color-dark-surface: #1c1b1f;
+            --s-color-dark-on-surface: #e5e1e6;
+            --s-color-dark-surface-variant: #47464f;
+            --s-color-dark-on-surface-variant: #c8c5d0;
+            --s-color-dark-inverse-surface: #e5e1e6;
+            --s-color-dark-inverse-on-surface: #313034;
+            --s-color-dark-inverse-primary: #5b53a8;
+            --s-color-dark-surface-container: #201f23;
+            --s-color-dark-surface-container-lowest: #0e0e11;
+            --s-color-dark-surface-container-low: #1c1b1f;
+            --s-color-dark-surface-container-high: #2a292d;
+            --s-color-dark-surface-container-highest: #353438;
+        }
+    </style>
+</head>
+
+<body>
+    <s-page theme="auto">
+        <!--抽屉布局-->
+        <s-drawer>
+            <!--应用栏-->
+            <s-appbar>
+                <!--应用栏-标题-->
+                <div slot="headline"> MobaXterm Key Generator </div>
+            </s-appbar>
+            <!--主视图-->
+            <s-scroll-view style="flex-grow: 1">
+                <main style="height: 100%;display: flex;">
+                    <s-card
+                        style="margin-left: 15%; max-width: 70%; width: 100%; padding: 16px; margin-top: 16px; margin-bottom: 16px; ">
+                        <div slot="headline">欢迎使用许可证生成器</div>
+                        <div slot="text">
+                            <p>请填写以下信息以生成许可证。</p>
+                            <p>注意：生成的许可证仅供学习和测试使用，请勿用于商业目的。</p>
+                            <a href="https://github.com/MeowCracker/MobaGenkey">https://github.com/MeowCracker/MobaGenkey</a>
+                            <s-text-field label="授权用户" id="licenseUser" style="width: 100%; margin-top: 16px;">
+                            </s-text-field>
+                            <s-text-field label="授权版本 (如 25.1)" id="licenseVersion"
+                                style="width: 100%; margin-top: 16px;"></s-text-field>
+                            <s-text-field label="授权用户数量（默认为 1）" id="licenseUserCount" type="number"
+                                style="width: 100%; margin-top: 16px;"></s-text-field>
+
+                            <div align="right" style="margin-top: 16px;">
+                                <s-button id="generateBtn">生成并保存</s-button>
+                            </div>
+                        </div>
+                    </s-card>
+                </main>
+            </s-scroll-view>
+        </s-drawer>
+    </s-page>
+    <script>
+        document.getElementById("generateBtn").addEventListener("click", async () => {
+            const licenseUser = document.getElementById("licenseUser").value.trim();
+            const licenseVersion = document.getElementById("licenseVersion").value.trim();
+            const licenseUserCount = document.getElementById("licenseUserCount").value.trim() || 1;
+
+                if(!licenseUser || !licenseVersion || !licenseUserCount) {
+                    alert("你需要正确填写授权用户和授权版本！");
+            return;
+        }
+
+            try {
+            const response = await fetch(`/api/generate?name=${encodeURIComponent(licenseUser)}&ver=${encodeURIComponent(licenseVersion)}&count=${encodeURIComponent(licenseUserCount)}`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+            if (!response.ok) {
+                const error = await response.json();
+                alert(`Error: ${error.detail}`);
+                return;
+            }
+
+            const blob = await response.blob();
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = "Custom.mxtpro";
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            window.URL.revokeObjectURL(url);
+        } catch (error) {
+            console.error("Error generating license:", error);
+            alert("在生成许可证的时候出现了问题，请检查网络连接或者查看日志！");
+        }
+        });
+    </script>
+</body>
+
+</html>
