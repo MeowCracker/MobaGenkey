@@ -2,6 +2,12 @@
 
 你应该知道这是干啥的
 
+## Contact
+
+- Telegram 私信: https://t.me/PaffCreamPMBot  
+- Telegram 群组: https://t.me/DohnaNyan  
+- Telegram 频道: https://t.me/PaffChannel 
+
 ## 开始使用
 
 先安装环境
